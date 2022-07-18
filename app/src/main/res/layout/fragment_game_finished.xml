@@ -32,7 +32,6 @@
         app:layout_constraintTop_toBottomOf="@+id/emoji_result"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="tv_score_answers"
         />
     <TextView
         android:id="@+id/tv_score_answers"
@@ -45,7 +44,6 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_required_answers"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="tv_required_percentage"
         />
     <TextView
         android:id="@+id/tv_required_percentage"
@@ -58,7 +56,6 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_score_answers"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="tv_score_percentage"
         />
     <TextView
         android:id="@+id/tv_score_percentage"
@@ -71,7 +68,6 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_required_percentage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="tv_score_answers"
         />
     <Button
         android:id="@+id/button_retry"
