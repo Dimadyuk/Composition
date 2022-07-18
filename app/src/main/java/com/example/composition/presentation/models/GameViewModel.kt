@@ -22,9 +22,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val getGameSettingsUseCase = GetGameSettingsUseCase(repository)
     private val generateQuestionUseCase = GenerateQuestionUseCase(repository)
 
-    //    private val _winner = MutableLiveData<Boolean>()
-//    val winner: LiveData<Boolean>
-//        get() = _winner
     private val _formattedTime = MutableLiveData<String>()
     val formattedTime: LiveData<String>
         get() = _formattedTime
@@ -41,15 +38,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private var countOfRightAnswers = 0
 
     private var countOfQuestions = 0
-
-
-    private val _leftNumber = MutableLiveData<Int>()
-    val leftNumber: LiveData<Int>
-        get() = _leftNumber
-
-    private val _answer = MutableLiveData<Int>()
-    val answer: LiveData<Int>
-        get() = _answer
 
     private val _gameResult = MutableLiveData<GameResult>()
     val gameResult: LiveData<GameResult>
