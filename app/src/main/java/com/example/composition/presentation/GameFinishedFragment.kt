@@ -1,5 +1,6 @@
 package com.example.composition.presentation
 
+import android.app.GameManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.fragment.app.FragmentManager
 import com.example.composition.R
 import com.example.composition.databinding.FragmentGameFinishedBinding
 import com.example.composition.domain.entity.GameResult
+import com.example.composition.domain.entity.GameSettings
 import com.example.composition.domain.entity.Level
 
 
@@ -62,7 +64,9 @@ class GameFinishedFragment : Fragment() {
     }
 
     private fun parsArgs(){
-        gameResult = requireArguments().getSerializable(KEY_GAME_RESULT) as GameResult
+        requireArguments().getParcelable<GameResult>(KEY_GAME_RESULT)?.let {
+            gameResult = it
+        }
     }
 
     companion object {
@@ -72,7 +76,7 @@ class GameFinishedFragment : Fragment() {
         fun newInstance(gameResult: GameResult): GameFinishedFragment {
             return GameFinishedFragment().apply {
                 arguments = Bundle().apply {
-                   putSerializable(KEY_GAME_RESULT, gameResult)
+                   putParcelable(KEY_GAME_RESULT, gameResult)
                 }
             }
         }
