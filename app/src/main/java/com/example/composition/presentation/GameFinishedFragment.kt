@@ -35,7 +35,8 @@ class GameFinishedFragment : Fragment() {
         super.onCreate(savedInstanceState)
         parsArgs()
     }
-    private fun retryGame(){
+
+    private fun retryGame() {
         requireActivity().supportFragmentManager.popBackStack(
             GameFragment.NAME,
             FragmentManager.POP_BACK_STACK_INCLUSIVE
@@ -55,7 +56,35 @@ class GameFinishedFragment : Fragment() {
                 }
             }
         )
+        bindViews()
+    }
 
+    private fun bindViews() {
+        with(binding) {
+            tvRequiredAnswers.text = String.format(
+                resources.getString(R.string.requires_answers),
+                gameResult.gameSettings.minCountOfRightAnswers
+            )
+            tvScoreAnswers.text = String.format(
+                resources.getString(R.string.score_answers),
+                gameResult.countOfRightAnswers
+            )
+            tvRequiredPercentage.text = String.format(
+                resources.getString(R.string.required_percentage),
+                gameResult.gameSettings.minPercentOfRightAnswers
+            )
+            val percent =
+                (gameResult.countOfRightAnswers / gameResult.countOfQuestions.toDouble() * 100).toInt()
+            tvScorePercentage.text = String.format(
+                resources.getString(R.string.score_percentage),
+                percent
+            )
+            if (gameResult.winner) {
+                emojiResult.setImageResource(R.drawable.ic_smile)
+            } else {
+                emojiResult.setImageResource(R.drawable.ic_sad)
+            }
+        }
     }
 
     override fun onDestroyView() {
@@ -63,7 +92,7 @@ class GameFinishedFragment : Fragment() {
         _binding = null
     }
 
-    private fun parsArgs(){
+    private fun parsArgs() {
         requireArguments().getParcelable<GameResult>(KEY_GAME_RESULT)?.let {
             gameResult = it
         }
@@ -76,7 +105,7 @@ class GameFinishedFragment : Fragment() {
         fun newInstance(gameResult: GameResult): GameFinishedFragment {
             return GameFinishedFragment().apply {
                 arguments = Bundle().apply {
-                   putParcelable(KEY_GAME_RESULT, gameResult)
+                    putParcelable(KEY_GAME_RESULT, gameResult)
                 }
             }
         }
