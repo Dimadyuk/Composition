@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_gameFragment_to_gameFinishedFragment"
             app:destination="@id/gameFinishedFragment" />
+        <argument
+            android:name="level"
+            app:argType="com.example.composition.domain.entity.Level" />
     </fragment>
     <fragment
         android:id="@+id/gameFinishedFragment"
@@ -39,5 +42,8 @@
         <action
             android:id="@+id/action_gameFinishedFragment_to_chooseLevelFragment"
             app:destination="@id/chooseLevelFragment" />
+        <argument
+            android:name="gameResult"
+            app:argType="com.example.composition.domain.entity.GameResult" />
     </fragment>
 </navigation>

@@ -1,23 +1,20 @@
 package com.example.composition.presentation
 
-import android.app.GameManager
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.composition.R
 import com.example.composition.databinding.FragmentGameFinishedBinding
 import com.example.composition.domain.entity.GameResult
-import com.example.composition.domain.entity.GameSettings
-import com.example.composition.domain.entity.Level
 
 
 class GameFinishedFragment : Fragment() {
-    private lateinit var gameResult: GameResult
+    private val args by navArgs<GameFinishedFragmentArgs>()
 
     private var _binding: FragmentGameFinishedBinding? = null
     private val binding: FragmentGameFinishedBinding
@@ -34,7 +31,7 @@ class GameFinishedFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        parsArgs()
+        //parsArgs()
     }
 
     private fun retryGame() {
@@ -42,7 +39,7 @@ class GameFinishedFragment : Fragment() {
 //            GameFragment.NAME,
 //            FragmentManager.POP_BACK_STACK_INCLUSIVE
 //        )
-       findNavController().navigate(R.id.action_gameFinishedFragment_to_chooseLevelFragment)
+        findNavController().navigate(R.id.action_gameFinishedFragment_to_chooseLevelFragment)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,23 +62,23 @@ class GameFinishedFragment : Fragment() {
         with(binding) {
             tvRequiredAnswers.text = String.format(
                 resources.getString(R.string.requires_answers),
-                gameResult.gameSettings.minCountOfRightAnswers
+                args.gameResult.gameSettings.minCountOfRightAnswers
             )
             tvScoreAnswers.text = String.format(
                 resources.getString(R.string.score_answers),
-                gameResult.countOfRightAnswers
+                args.gameResult.countOfRightAnswers
             )
             tvRequiredPercentage.text = String.format(
                 resources.getString(R.string.required_percentage),
-                gameResult.gameSettings.minPercentOfRightAnswers
+                args.gameResult.gameSettings.minPercentOfRightAnswers
             )
             val percent =
-                (gameResult.countOfRightAnswers / gameResult.countOfQuestions.toDouble() * 100).toInt()
+                (args.gameResult.countOfRightAnswers / args.gameResult.countOfQuestions.toDouble() * 100).toInt()
             tvScorePercentage.text = String.format(
                 resources.getString(R.string.score_percentage),
                 percent
             )
-            if (gameResult.winner) {
+            if (args.gameResult.winner) {
                 emojiResult.setImageResource(R.drawable.ic_smile)
             } else {
                 emojiResult.setImageResource(R.drawable.ic_sad)
@@ -94,23 +91,23 @@ class GameFinishedFragment : Fragment() {
         _binding = null
     }
 
-    private fun parsArgs() {
-        requireArguments().getParcelable<GameResult>(KEY_GAME_RESULT)?.let {
-            gameResult = it
-        }
-    }
+//    private fun parsArgs() {
+//        requireArguments().getParcelable<GameResult>(KEY_GAME_RESULT)?.let {
+//            gameResult = it
+//        }
+//    }
 
-    companion object {
-
-        const val KEY_GAME_RESULT = "game_result"
-
-        fun newInstance(gameResult: GameResult): GameFinishedFragment {
-            return GameFinishedFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(KEY_GAME_RESULT, gameResult)
-                }
-            }
-        }
-    }
+//    companion object {
+//
+//        private const val KEY_GAME_RESULT = "game_result"
+//
+//        fun newInstance(gameResult: GameResult): GameFinishedFragment {
+//            return GameFinishedFragment().apply {
+//                arguments = Bundle().apply {
+//                    putParcelable(KEY_GAME_RESULT, gameResult)
+//                }
+//            }
+//        }
+//    }
 
 }
