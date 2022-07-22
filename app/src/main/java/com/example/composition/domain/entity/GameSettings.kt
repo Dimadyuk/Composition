@@ -1,6 +1,7 @@
 package com.example.composition.domain.entity
 
 import android.os.Parcelable
+import androidx.dynamicanimation.animation.SpringAnimation
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
